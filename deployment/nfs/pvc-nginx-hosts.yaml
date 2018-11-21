@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: pvc-nginx-hosts
+ labels:
+   type: nfs
+   app: pvc-nginx-hosts
+   version: v1
+spec:
+ accessModes:
+    - ReadWriteMany
+ resources:
+   requests:
+     storage: 1Gi

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-hosts
+  labels:
+    app: nginx-hosts
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-hosts
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: nginx-hosts
+        version: v1
+    spec:
+      containers:
+      - name: nginx-hosts
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: pvc-nginx-hosts
+      volumes:
+      - name: pvc-nginx-hosts
+        persistentVolumeClaim:
+          claimName: pvc-nginx-hosts
