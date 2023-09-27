@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tc-activity-deployment
+  namespace: sit
+  labels:
+    app: tc-activity
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tc-activity
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: tc-activity
+        version: v1
+    spec:
+      containers:
+      - name: tc-activity
+        image: xxx/tc-activity:xxx
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+        - name: aliyuncs
