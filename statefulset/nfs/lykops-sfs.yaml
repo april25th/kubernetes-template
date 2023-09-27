@@ -1,0 +1,38 @@
+apiVersion: apps/v1beta1 
+kind: StatefulSet 
+metadata:
+ name: lykops-sfs
+ labels:
+   software: apache
+   project: lykops
+   app: lykops-sfs
+   version: v1
+spec:
+ serviceName: lykops-sfs
+ template:
+   metadata:
+     labels:
+       software: apache
+       project: lykops
+       app: lykops-sfs
+       version: v1
+       name: test-sfs
+   spec:
+     containers:
+     - name: lykops-sfs
+       image: nginx
+       ports:
+       - containerPort: 80
+         name: apache
+       volumeMounts:
+       - name: pvc
+         mountPath: /data/compose/k8s/nginx/web-0
+ volumeClaimTemplates:
+  - metadata:
+      name: pvc
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      resources:
+        requests:
+          storage: 1Gi
+

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+ name: pv-nginx-hosts
+ labels:
+   type: nfs
+   app: pv-nginx-hosts
+   version: v1
+spec:
+ capacity:
+   storage: 1Gi
+ accessModes:
+    - ReadWriteMany
+ persistentVolumeReclaimPolicy: Retain
+ nfs:
+   path: /data/compose/hosts
+   server: 10.88.9.34
+   readOnly: false
